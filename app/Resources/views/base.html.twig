@@ -16,6 +16,13 @@
 			<div>
 			{% block main %}
 				<h2>{{ block('page_title') }}</h2>
+				<div>
+				{% block flashmsgs %}
+				{% for flashMessage in app.session.flashbag.get('notice') %}
+				<p class="flash-notice">{{ flashMessage }}</p>
+				{% endfor %}
+				{% endblock %}
+				</div>
 				{% block content %}{% endblock %}
 			{% endblock %}
 			</div>
