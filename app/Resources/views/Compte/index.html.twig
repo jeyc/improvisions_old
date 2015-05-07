@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title -%}Liste des comptes{% endblock %}
+{% block content -%}
+
+        <p><a href="{{ path('comptes_new') }}">Créer un nouveau compte</a></p>
+    
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Numéro</th>
+                <th>Libellé</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.numero }}</td>
+                <td>{{ entity.libelle }}</td>
+                <td><a href="{{ path('comptes_edit', { 'id': entity.id }) }}">Modifier</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

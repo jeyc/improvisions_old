@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title -%}Détails du compte{% endblock %}
+{% block content -%}
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Numéro</th>
+                <td>{{ entity.numero }}</td>
+            </tr>
+            <tr>
+                <th>Libellé</th>
+                <td>{{ entity.libelle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('comptes') }}">
+            Retour à la liste des comptes
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('comptes_edit', { 'id': entity.id }) }}">
+            Modifier le compte
+        </a>
+    </li>
+    <li>
+		{{ form_start(delete_form) }}
+		<input type="submit" value="Supprimer le compte"/>
+		{{ form_end(delete_form) }}
+	</li>
+</ul>
+{% endblock %}
