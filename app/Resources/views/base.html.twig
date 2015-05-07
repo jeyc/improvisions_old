@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% block page_title %}{% endblock %} - {% block site_title %}Improvisions{% endblock %}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}
+			<header>
+			{% block header %}
+				<h1><a href="{{ path('homepage') }}">{{ block('site_title') }}</a></h1>
+			{% endblock %}
+			</header>
+		{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
