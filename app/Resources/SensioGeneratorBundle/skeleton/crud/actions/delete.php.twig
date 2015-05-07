@@ -28,6 +28,12 @@
 
             $em->remove($entity);
             $em->flush();
+			
+			$this->get('session')->getFlashBag()->add(
+				'notice',
+				'L\'entité a bien été supprimée.'
+			);
+
         }
 {% endblock method_body %}
 
