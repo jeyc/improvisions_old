@@ -1,0 +1,21 @@
+{% block extends %}
+{{ "{% extends 'base.html.twig' %}" }}
+{% endblock extends %}
+
+{{ "{% block page_title -%}" }}Création d'une entité {{ entity }}{{ "{% endblock %}" }}
+{% block body %}
+{{ "{% block content -%}" }}
+
+    {{ '{{ form_start(form) }}' }}
+		{{ '{{ form_errors(form) }}' }}
+		
+		{{ '{{ form_widget(form) }}' }}
+		
+		<input type="submit" value="Créer l'entité" />
+	{{ '{{ form_end(form) }}' }}
+	
+	
+    {% set hide_edit, hide_delete = true, true %}
+    {% include 'crud/views/others/record_actions.html.twig.twig' %}
+{{ "{% endblock %}" }}
+{% endblock body %}

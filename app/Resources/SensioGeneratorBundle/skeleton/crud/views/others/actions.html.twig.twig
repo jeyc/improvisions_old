@@ -1,0 +1,14 @@
+
+                <ul>
+    <li>
+        <a href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { 'id': entity."~ identifier ~" }) }}" }}">
+            Voir le détail
+        </a>
+    </li>
+    <li>
+        <a href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': entity."~ identifier ~" }) }}" }}">
+            Modifier 
+        </a>
+    </li>
+
+                </ul>
