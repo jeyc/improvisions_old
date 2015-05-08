@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title -%}Modification d'une entité FreqOp{% endblock %}
+{% block content -%}
+    
+    {{ form_start(edit_form) }}
+		{{ form_errors(edit_form) }}
+		
+		{{ form_widget(edit_form) }}
+		
+		<input type="submit" value="Modifier l'entité" />
+	{{ form_end(edit_form) }}
+	
+	
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('operations-frequentes_') }}">
+            Retour à la liste
+        </a>
+    </li>
+    <li>
+		{{ form_start(delete_form) }}
+		<input type="submit" value="Supprimer l'entité"/>
+		{{ form_end(delete_form) }}
+	</li>
+</ul>
+{% endblock %}
