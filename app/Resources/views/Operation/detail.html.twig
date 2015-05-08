@@ -1,0 +1,28 @@
+
+<div class="operation_detail">
+	<p class="operation_libelle">{{ operation.libelle }}</p>
+	<p class="operation_date">{{ operation.date|date('m/d/Y') }}</p>
+	<table class="operation_mouvements">
+		<tr>
+			<th>Compte</th>
+			<th>Débit</th>
+			<th>Crédit</th>
+		</tr>
+		{% for mouvement in operation.mouvements %}
+		<tr>
+			<td>{{ mouvement.compte.libelle }}</td>
+			<td>
+				{% if mouvement.type is constant('DEB', mouvement) %}
+					{{ mouvement.montant }}
+				{% endif %}
+			</td>
+			<td>
+				{% if mouvement.type is constant('CRE', mouvement) %}
+					{{ mouvement.montant }}
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<p><a href="{{ path('operations_edit', { 'id': operation.id }) }}">Modifier</a></p>
+</div>
