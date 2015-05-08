@@ -11,6 +11,18 @@
 			<header>
 			{% block header %}
 				<h1><a href="{{ path('homepage') }}">{{ block('site_title') }}</a></h1>
+				<nav>
+					<h2>Gestion des comptes</h2>
+					<ul>
+						<li><a href="{{ path('comptes') }}">Liste des comptes</a></li>
+						<li><a href="{{ path('comptes_new') }}">Nouveau compte</a></li>
+					</ul>
+					<h2>Gestion des opérations</h2>
+					<ul>
+						<li><a href="{{ path('operations') }}">Liste des opérations</a></li>
+						<li><a href="{{ path('operations_new') }}">Nouvelle opération</a></li>
+					</ul>
+				</nav>
 			{% endblock %}
 			</header>
 			<div>
