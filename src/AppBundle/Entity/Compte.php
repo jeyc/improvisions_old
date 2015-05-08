@@ -94,4 +94,15 @@ class Compte
     {
         return $this->libelle;
     }
+	
+	/**
+     * To String
+     *
+     * @return string 
+     */
+    public function __toString()
+    {
+        return $this->getNumero() . ' - ' . $this->getLibelle();
+    }
+	
 }
