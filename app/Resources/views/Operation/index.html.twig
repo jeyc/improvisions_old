@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title -%}Liste des opérations{% endblock %}
+
+{% block content -%}
+
+        <p><a href="{{ path('operations_new') }}">Créer une nouvelle opération</a></p>
+    
+
+        {% for operation in entities %}
+            {% include 'operation/detail.html.twig' %}
+        {% endfor %}
+        
+{% endblock %}
