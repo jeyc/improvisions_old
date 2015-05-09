@@ -1,0 +1,43 @@
+html {
+	font-family: Verdana;
+	font-size: 0.8em;
+}
+/*
+html * {
+	border: 1px black solid;
+}
+*/
+header {
+	background-color: grey;
+	color: white;
+	margin-bottom: 10px;
+}
+
+header h1 {
+	padding-left: 10px;
+}
+
+header a {
+	text-decoration: none;
+	color: white;
+}
+
+nav#menu {
+	padding: 10px;
+	margin: 0 10px 0 0;
+}
+
+nav#menu h2 {
+	margin: 0;
+	font-size: 1em;
+}
+
+nav#menu ul {
+	padding: 0 0 0 5px;
+	margin: 0;
+}
+
+nav#menu li {
+	list-style: none;
+	margin: 0;
+}

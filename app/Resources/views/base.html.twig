@@ -3,7 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}{% block page_title %}{% endblock %} - {% block site_title %}Improvisions{% endblock %}{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+			{% stylesheets 'css/*' filter='cssrewrite' output='css/styles.css' %}
+			<link rel="stylesheet" href="{{ asset_url }}" />
+			{% endstylesheets %}
+		{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -11,7 +15,12 @@
 			<header>
 			{% block header %}
 				<h1><a href="{{ path('homepage') }}">{{ block('site_title') }}</a></h1>
-				<nav>
+			{% endblock %}
+			</header>
+
+			<div id="main">
+		
+				<nav id="menu">
 					<h2>Gestion des comptes</h2>
 					<ul>
 						<li><a href="{{ path('comptes') }}">Liste des comptes</a></li>
@@ -28,22 +37,21 @@
 						<li><a href="{{ path('operations_frequentes') }}">Toutes des opérations-types</a></li>
 						<li><a href="{{ path('operations_frequentes_new') }}">Nouvelle opération-type</a></li>
 					</ul>
-					
 				</nav>
-			{% endblock %}
-			</header>
-			<div>
+			
+				<div id="content">
 			{% block main %}
 				<h2>{{ block('page_title') }}</h2>
-				<div>
+				
 				{% block flashmsgs %}
 				{% for flashMessage in app.session.flashbag.get('notice') %}
 				<p class="flash-notice">{{ flashMessage }}</p>
 				{% endfor %}
 				{% endblock %}
-				</div>
+				
 				{% block content %}{% endblock %}
 			{% endblock %}
+				</div>
 			</div>
 		{% endblock %}
         {% block javascripts %}{% endblock %}
