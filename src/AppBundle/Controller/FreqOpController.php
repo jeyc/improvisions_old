@@ -345,6 +345,10 @@ class FreqOpController extends Controller
 
         if ($form->isValid()) {
             $em->persist($entity);
+			
+			$freqop->incrNbutils();
+			$em->persist($freqop);
+			
             $em->flush();
 			
 			$this->get('session')->getFlashBag()->add(
