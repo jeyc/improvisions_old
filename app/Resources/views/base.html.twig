@@ -22,6 +22,8 @@
 						<li><a href="{{ path('operations') }}">Liste des opérations</a></li>
 						<li><a href="{{ path('operations_new') }}">Nouvelle opération</a></li>
 					</ul>
+					<h2>Opérations-type les plus fréquentes</h2>
+					{{ render(controller('AppBundle:FreqOp:recentFreqOps', { 'max': 3 })) }}
 				</nav>
 			{% endblock %}
 			</header>
