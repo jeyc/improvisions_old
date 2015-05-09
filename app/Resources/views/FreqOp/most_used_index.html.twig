@@ -1,0 +1,7 @@
+<ul>
+{% for freqop in freqops %}
+  <li><a href="{{ path('operations_new_from_freqop', {'id': freqop.id}) }}">
+      {{ freqop.libelle }}
+  </a></li>
+{% endfor %}
+</ul>

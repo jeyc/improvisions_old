@@ -30,6 +30,14 @@ class FreqOp
      */
     private $libelle;
 
+	
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbutils", type="integer", options={"default"=0})
+     */
+    private $nbutils;
+
 	/**
      * @var \AppBundle\Entity\FreqOpMouvement[]
      * @ORM\OneToMany(targetEntity="FreqOpMouvement",mappedBy="freqop",cascade={"persist"})
@@ -74,6 +82,7 @@ class FreqOp
     public function __construct()
     {
         $this->mouvements = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->nbutils = 0;
     }
 
     /**
@@ -186,4 +195,43 @@ class FreqOp
 		/* On s'arrête là, les autres contraintes peuvent être vérifiées au niveau de chaque mouvement */
 		
     }
+
+    /**
+     * Set nbutils
+     *
+     * @param integer $nbutils
+     * @return FreqOp
+     */
+    public function setNbutils($nbutils)
+    {
+        $this->nbutils = $nbutils;
+
+        return $this;
+    }
+
+	/**
+     * Incr nbutils
+     *
+     * @return FreqOp
+     */
+    public function incrNbutils()
+    {
+        $this->setNbutils($this->getNbutils() + 1);
+
+        return $this;
+    }
+
+	
+	
+	
+    /**
+     * Get nbutils
+     *
+     * @return integer 
+     */
+    public function getNbutils()
+    {
+        return $this->nbutils;
+    }
+
 }
