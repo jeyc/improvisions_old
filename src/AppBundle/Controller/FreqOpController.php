@@ -9,7 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\FreqOp;
 use AppBundle\Form\FreqOpType;
+use AppBundle\Form\OperationType;
 use AppBundle\Entity\FreqOpMouvement;
+use AppBundle\Entity\Operation;
+use AppBundle\Entity\Mouvement;
 
 /**
  * FreqOp controller.
@@ -22,7 +25,7 @@ class FreqOpController extends Controller
     /**
      * Lists all FreqOp entities.
      *
-     * @Route("/", name="operations-frequentes_")
+     * @Route("/", name="operations_frequentes")
      * @Method("GET")
      * @Template("FreqOp/index.html.twig")
      */
@@ -39,7 +42,7 @@ class FreqOpController extends Controller
     /**
      * Creates a new FreqOp entity.
      *
-     * @Route("/", name="operations-frequentes__create")
+     * @Route("/", name="operations_frequentes_create")
      * @Method("POST")
      * @Template("FreqOp/new.html.twig")
      */
@@ -59,7 +62,7 @@ class FreqOpController extends Controller
 				'L\'entité a bien été créée.'
 			);
 
-            return $this->redirect($this->generateUrl('operations-frequentes__show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('operations_frequentes_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -83,7 +86,7 @@ class FreqOpController extends Controller
 			$mouvement->setFreqOp($entity);
 		}
         $form = $this->createForm(new FreqOpType(), $entity, array(
-            'action' => $this->generateUrl('operations-frequentes__create'),
+            'action' => $this->generateUrl('operations_frequentes_create'),
             'method' => 'POST',
         ));
 
@@ -93,7 +96,7 @@ class FreqOpController extends Controller
     /**
      * Displays a form to create a new FreqOp entity.
      *
-     * @Route("/new", name="operations-frequentes__new")
+     * @Route("/new", name="operations_frequentes_new")
      * @Method("GET")
      * @Template("FreqOp/new.html.twig")
      */
@@ -111,7 +114,7 @@ class FreqOpController extends Controller
     /**
      * Finds and displays a FreqOp entity.
      *
-     * @Route("/{id}", name="operations-frequentes__show")
+     * @Route("/{id}", name="operations_frequentes_show")
      * @Method("GET")
      * @Template("FreqOp/show.html.twig")
      */
@@ -136,7 +139,7 @@ class FreqOpController extends Controller
     /**
      * Displays a form to edit an existing FreqOp entity.
      *
-     * @Route("/{id}/edit", name="operations-frequentes__edit")
+     * @Route("/{id}/edit", name="operations_frequentes_edit")
      * @Method("GET")
      * @Template("FreqOp/edit.html.twig")
      */
@@ -170,7 +173,7 @@ class FreqOpController extends Controller
     private function createEditForm(FreqOp $entity)
     {
         $form = $this->createForm(new FreqOpType(), $entity, array(
-            'action' => $this->generateUrl('operations-frequentes__update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('operations_frequentes_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -179,7 +182,7 @@ class FreqOpController extends Controller
     /**
      * Edits an existing FreqOp entity.
      *
-     * @Route("/{id}", name="operations-frequentes__update")
+     * @Route("/{id}", name="operations_frequentes_update")
      * @Method("PUT")
      * @Template("FreqOp/edit.html.twig")
      */
@@ -205,7 +208,7 @@ class FreqOpController extends Controller
 				'L\'entité a bien été modifiée.'
 			);
 
-            return $this->redirect($this->generateUrl('operations-frequentes__edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('operations_frequentes_edit', array('id' => $id)));
         }
 
         return array(
@@ -217,7 +220,7 @@ class FreqOpController extends Controller
     /**
      * Deletes a FreqOp entity.
      *
-     * @Route("/{id}", name="operations-frequentes__delete")
+     * @Route("/{id}", name="operations_frequentes_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -243,7 +246,7 @@ class FreqOpController extends Controller
 
         }
 
-        return $this->redirect($this->generateUrl('operations-frequentes_'));
+        return $this->redirect($this->generateUrl('operations_frequentes'));
     }
 
     /**
@@ -256,9 +259,109 @@ class FreqOpController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('operations-frequentes__delete', array('id' => $id)))
+            ->setAction($this->generateUrl('operations_frequentes_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->getForm()
         ;
     }
+	
+	/**
+     * Displays a form to create a new Operation entity from FreqOp entity.
+     *
+     * @Route("/{id}/new", name="operations_new_from_freqop")
+     * @Method("GET")
+     * @Template("FreqOp/new_op_from_freqop.html.twig")
+     */
+    public function newOperationAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $freqop = $em->getRepository('AppBundle:FreqOp')->find($id);
+
+        if (!$freqop) {
+            throw $this->createNotFoundException('Unable to find FreqOp entity.');
+        }
+		
+        $op = new Operation();
+        $op->setLibelle($freqop->getLibelle());
+		
+		
+		$form = $this->createCreateOperationForm($op, $freqop);
+
+        return array(
+			'freqop' => $freqop,
+            'op' => $op,
+            'form'   => $form->createView(),
+        );
+    }
+	
+    /**
+     * Creates a form to create a Operation entity from FreqOp entity.
+     *
+     * @param Operation $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateOperationForm(Operation $entity, FreqOp $freqop)
+    {
+
+		foreach ($freqop->getMouvements() as $fmouvement)
+		{
+			$mouvement = new Mouvement();
+			$mouvement->setType($fmouvement->getType());
+			$mouvement->setCompte($fmouvement->getCompte());
+			$mouvement->setOperation($entity);
+		}
+	
+        $form = $this->createForm(new OperationType(), $entity, array(
+            'action' => $this->generateUrl('operations_create_from_freqop', array('id' => $freqop->getId())),
+            'method' => 'POST',
+        ));
+
+        return $form;
+    }
+
+    /**
+     * Creates a new Operation entity from freqop entity.
+     *
+     * @Route("/{id}", name="operations_create_from_freqop")
+     * @Method("POST")
+     * @Template("FreqOp/new_op_from_freqop.html.twig")
+     */
+    public function createOperationAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $freqop = $em->getRepository('AppBundle:FreqOp')->find($id);
+
+        if (!$freqop) {
+            throw $this->createNotFoundException('Unable to find FreqOp entity.');
+        }
+		
+		$entity = new Operation();
+		
+		$form = $this->createCreateOperationForm($entity, $freqop);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+			
+			$this->get('session')->getFlashBag()->add(
+				'notice',
+				'L\'entité a bien été créée.'
+			);
+
+            return $this->redirect($this->generateUrl('operations_show', array('id' => $entity->getId())));
+        }
+
+        return array(
+			'freqop' => $freqop,
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
+    }
+
+	
+	
 }

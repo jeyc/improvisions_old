@@ -3,7 +3,7 @@
 {% block page_title -%}Liste des entités FreqOp{% endblock %}
 {% block content -%}
 
-        <p><a href="{{ path('operations-frequentes__new') }}">Créer une nouvelle entité</a></p>
+        <p><a href="{{ path('operations_frequentes_new') }}">Créer une nouvelle entité</a></p>
     
 
     <table class="records_list">
@@ -17,17 +17,17 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('operations-frequentes__show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('operations_frequentes_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.libelle }}</td>
                 <td>
                 <ul>
     <li>
-        <a href="{{ path('operations-frequentes__show', { 'id': entity.id }) }}">
+        <a href="{{ path('operations_frequentes_show', { 'id': entity.id }) }}">
             Voir le détail
         </a>
     </li>
     <li>
-        <a href="{{ path('operations-frequentes__edit', { 'id': entity.id }) }}">
+        <a href="{{ path('operations_frequentes_edit', { 'id': entity.id }) }}">
             Modifier 
         </a>
     </li>

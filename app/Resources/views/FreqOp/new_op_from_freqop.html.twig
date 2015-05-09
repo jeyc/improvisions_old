@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title -%}{{ freqop.libelle}} : nouvelle opération{% endblock %}
+{% block content -%}
+
+    {{ form_start(form) }}
+		{{ form_errors(form) }}
+		
+		{{ form_row(form.date) }}
+		{{ form_row(form.libelle) }}
+		
+		<table>
+			<tr>
+				<th>Compte</th>
+				<th>Type</th>
+				<th>Montant</th>
+			</tr>
+		{% for mouvement in form.mouvements %}
+			<tr>
+				<td>{{ form_widget(mouvement.compte) }}{{ form_errors(mouvement.compte) }}</td>
+				<td>{{ form_widget(mouvement.type) }}{{ form_errors(mouvement.type) }}</td>
+				<td>{{ form_widget(mouvement.montant) }}{{ form_errors(mouvement.montant) }}</td>
+			</tr>
+		{% endfor %}
+		</table>
+		
+		<input type="submit" value="Enregistrer" />
+	{{ form_end(form) }}
+	
+	
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('operations_frequentes') }}">
+            Retour à la liste des opérations-types
+        </a>
+    </li>
+</ul>
+{% endblock %}
