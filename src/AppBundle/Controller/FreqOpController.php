@@ -366,6 +366,24 @@ class FreqOpController extends Controller
         );
     }
 
-	
-	
+
+    /**
+     * Lists most used freqops
+     *
+     * @Template("FreqOp/most_used_index.html.twig")
+     */
+    public function recentFreqOpsAction($max = 3)
+    {
+        $em = $this->getDoctrine()->getManager();
+		
+		$query = $em->createQuery(
+			'SELECT fop
+			FROM AppBundle:FreqOp fop
+			ORDER BY fop.nbutils'
+		)->setMaxResults($max);
+        
+		$freqops = $query->getResult();
+		
+		return array('freqops' => $freqops);
+    }
 }
