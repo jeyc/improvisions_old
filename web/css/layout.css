@@ -1,0 +1,21 @@
+header h1, div#main {
+	width: 60%;
+	margin: auto;
+}
+
+header  {
+	line-height: 100px;
+}
+
+#menu, #content {
+	display: inline-block;
+	vertical-align: top;
+}
+
+#menu {
+	width: 250px;
+}
+
+#contenu {
+	margin-left: 250px;
+}
