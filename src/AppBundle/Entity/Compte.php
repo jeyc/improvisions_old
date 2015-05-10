@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table("improvisions.comptes",uniqueConstraints={@ORM\UniqueConstraint(columns={"numero"})})
  * @ORM\Entity()
- * @UniqueEntity(fields={"numero"},message="Le compte existe déjà")
+ * @UniqueEntity(fields={"numero"},message="Ce compte existe déjà")
  */
 class Compte
 {
@@ -29,6 +30,8 @@ class Compte
      * @var string
      *
      * @ORM\Column(name="numero", type="string", length=6)
+	 * @Assert\NotBlank(message="Veuillez saisir un numéro de compte")
+	 * @Assert\Type(type="digit",message="Le numéro de compte doit être composé de chiffres exclusivement")
      */
     private $numero;
 
@@ -36,6 +39,7 @@ class Compte
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=255)
+	 * @Assert\NotBlank(message="Veuillez saisir un libellé")
      */
     private $libelle;
 
