@@ -9,6 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Compte;
 use AppBundle\Form\CompteType;
+use AppBundle\Form\CompteCollectionType;
+
+use AppBundle\Entity\CompteCollection;
 
 /**
  * Compte controller.
@@ -47,39 +50,46 @@ class CompteController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Compte();
-        $form = $this->createCreateForm($entity);
+        $comptes = new CompteCollection();
+        $form = $this->createCreateCollectionForm($comptes);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+			foreach ($comptes->getComptes() as $compte)
+			{
+				$em->persist($compte); 
+			}
             $em->flush();
 			
 			$this->get('session')->getFlashBag()->add(
 				'notice',
-				'L\'entité a bien été créée.'
+				'Les comptes ont été correctement créés.'
 			);
 
-            return $this->redirect($this->generateUrl('comptes_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('comptes'));
         }
 
         return array(
-            'entity' => $entity,
             'form'   => $form->createView(),
         );
     }
 
-    /**
-     * Creates a form to create a Compte entity.
+	/**
+     * Creates a form to create x Compte entities.
      *
      * @param Compte $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Compte $entity)
+    private function createCreateCollectionForm(CompteCollection $comptes)
     {
-        $form = $this->createForm(new CompteType(), $entity, array(
+		for ($i = 0; $i < 10; $i++)
+		{
+			$comptes->addCompte(new Compte);
+		}
+        
+        $form = $this->createForm(new CompteCollectionType(), $comptes, array(
             'action' => $this->generateUrl('comptes_create'),
             'method' => 'POST',
         ));
@@ -87,20 +97,20 @@ class CompteController extends Controller
         return $form;
     }
 
+	
     /**
      * Displays a form to create a new Compte entity.
      *
-     * @Route("/new", name="comptes_new")
+     * @Route("/ajout", name="comptes_new")
      * @Method("GET")
      * @Template("Compte/new.html.twig")
      */
     public function newAction()
     {
-        $entity = new Compte();
-        $form   = $this->createCreateForm($entity);
+		$comptes = new CompteCollection();
+		$form   = $this->createCreateCollectionForm($comptes);
 
         return array(
-            'entity' => $entity,
             'form'   => $form->createView(),
         );
     }

@@ -1,23 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block page_title -%}Création d'un compte{% endblock %}
+{% block page_title -%}Ajout de comptes{% endblock %}
 {% block content -%}
 
     {{ form_start(form) }}
 		{{ form_errors(form) }}
-		
-		{{ form_row(form.numero, {'label': 'Numéro'}) }}
-		{{ form_row(form.libelle, {'label': 'Libellé'}) }}
-		
-		<input type="submit" value="Créer le compte" />
+		<table>
+			<tr>
+				<th>Numéro</th>
+				<th>Libellé</th>
+				<th></th>
+			</tr>
+		{% for compte in form.comptes %}
+			<tr>
+				<td>{{ form_widget(compte.numero, {'label': 'Numéro'}) }}</td>
+				<td>{{ form_widget(compte.libelle, {'label': 'Libellé'}) }}</td>
+				<td>
+					{{ form_errors(compte.numero) }}
+					{{ form_errors(compte.libelle) }}
+				</td>
+			</tr>
+		{% endfor %}
+		</table>
+		<input type="submit" value="Ajouter les comptes" />
 	{{ form_end(form) }}
 	
-	
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('comptes') }}">
-            Retour à la liste des comptes
-        </a>
-    </li>
-</ul>
 {% endblock %}
