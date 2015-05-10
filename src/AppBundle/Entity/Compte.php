@@ -6,11 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
  * Compte
  *
  * @ORM\Table("improvisions.comptes",uniqueConstraints={@ORM\UniqueConstraint(columns={"numero"})})
- * @ORM\Entity(repositoryClass="AppBundle\Entity\CompteRepository")
+ * @ORM\Entity()
  * @UniqueEntity(fields={"numero"},message="Le compte existe déjà")
  */
 class Compte

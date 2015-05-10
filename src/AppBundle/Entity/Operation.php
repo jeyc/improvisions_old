@@ -7,11 +7,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 
+
 /**
  * Operation
  *
  * @ORM\Table("improvisions.operations")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\OperationRepository")
+ * @ORM\Entity()
  */
 class Operation
 {
