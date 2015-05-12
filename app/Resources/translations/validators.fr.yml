@@ -1,0 +1,10 @@
+compte:
+    code:
+        not_blank: Veuillez saisir un code pour le compte.
+        type_digit: Le code du compte ne doit comporter que des chiffres.
+        length: Le code du compte doit faire exactement 6 caractères.
+        regex: Le code doit commencer par un chiffre de 1 à 9 suivi d'exatement 5 chiffres.
+        unique: Ce code est déjà pris.
+        
+    libelle:
+        not_blank: Veuillez saisir un libellé pour le compte.
