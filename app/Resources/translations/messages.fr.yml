@@ -4,3 +4,14 @@ site:
 parametrage:
     title: Paramétrage
     
+compte:
+    label:
+        code: Code
+        libelle: Libellé
+    form:
+        submit.collection_creation: Créer les comptes
+    page:
+        collection_creation:
+            title: Nouveaux comptes
+    menu:
+        title: Comptes
