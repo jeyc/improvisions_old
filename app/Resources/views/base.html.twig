@@ -7,13 +7,20 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}
-			<header>
-			{% block header %}
-				<h1><a href="{{ path('homepage') }}">{{ block('site_title') }}</a></h1>
-			{% endblock %}
-			</header>
-		{% endblock %}
+        <header>
+			<h1><a href="{{ path('homepage') }}">{{ block('site_title') }}</a></h1>
+		</header>
+		
+		<nav id="nav">
+			{% block nav %}{% endblock %}
+		</nav>
+		
+		<div>
+			<h2>{{ block('page_title') }}</h2>
+		
+			{% block content %}{% endblock %}
+		</div>
+		
         {% block javascripts %}{% endblock %}
     </body>
 </html>
