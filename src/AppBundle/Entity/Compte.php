@@ -29,8 +29,6 @@ class Compte
      *
      * @ORM\Column(name="code", type="string", length=6)
      * @Assert\NotBlank(message="compte.code.not_blank")
-	 * @Assert\Type(type="digit", message="compte.code.type_digit")
-	 * @Assert\Length(min="6", max="6", exactMessage="compte.code.length")
 	 * @Assert\Regex(pattern="^[1-9][0-9]{5,5}^", message="compte.code.regex")
 	*/
     private $code;
