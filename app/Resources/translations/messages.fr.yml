@@ -13,5 +13,7 @@ compte:
     page:
         collection_creation:
             title: Nouveaux comptes
+        index:
+            title: Liste des comptes
     menu:
         title: Comptes

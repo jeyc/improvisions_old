@@ -23,6 +23,23 @@ class CompteController extends Controller
 {
 
     /**
+     * Lists all Compte entities.
+     *
+     * @Route("/", name="parametrage_comptes")
+     * @Method("GET")
+     * @Template("compte/index.html.twig")
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $comptes = $em->getRepository('AppBundle:Compte')->findBy(array(), array('code' => 'ASC'));
+
+        return array(
+            'comptes' => $comptes,
+        );
+    }
+    /**
      * Crée un ensemble d'entités "Compte"
      *
      * @Route("/", name="parametrage_comptes_create")
