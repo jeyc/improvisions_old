@@ -9,6 +9,11 @@
     <body>
         <header>
 			<h1><a href="{{ path('homepage') }}">{{ block('site_title') }}</a></h1>
+			<nav id="menu">
+				<ul>
+					<li><a href="{{ path('parametrage') }}">{{ 'parametrage.title'|trans }}</a></li>
+				</ul>
+			</nav>
 		</header>
 		
 		<nav id="nav">
