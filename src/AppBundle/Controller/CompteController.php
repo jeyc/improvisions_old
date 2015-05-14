@@ -115,4 +115,125 @@ class CompteController extends Controller
         );
     }
 
+    
+    /**
+     * Displays a form to edit an existing Compte entity.
+     *
+     * @Route("/{code}", name="parametrage_comptes_edit")
+     * @Method("GET")
+     * @Template("compte/edit.html.twig")
+     */
+    public function editAction($code)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $compte = $em->getRepository('AppBundle:Compte')->findOneByCode($code);
+
+        if (!$compte) {
+			$str = $this->get('translator')->trans('compte.not_found', array('%code%' => $code));
+            throw $this->createNotFoundException($str);
+        }
+
+        $editForm = $this->createEditForm($compte);
+        $deleteForm = $this->createDeleteForm($code);
+
+        return array(
+            'compte'      => $compte,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+    * Creates a form to edit a Compte entity.
+    *
+    * @param Compte $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createEditForm(Compte $compte)
+    {
+        $form = $this->createForm(new CompteType(), $compte, array(
+            'action' => $this->generateUrl('parametrage_comptes_update', array('code' => $compte->getCode())),
+            'method' => 'PUT',
+        ));
+
+        return $form;
+    }
+    /**
+     * Edits an existing Compte entity.
+     *
+     * @Route("/{code}", name="parametrage_comptes_update")
+     * @Method("PUT")
+     * @Template("compte/edit.html.twig")
+     */
+    public function updateAction(Request $request, $code)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $compte = $em->getRepository('AppBundle:Compte')->findOneByCode($code);
+
+        if (!$compte) {
+            $str = $this->get('translator')->trans('compte.not_found', array('%code%' => $code));
+            throw $this->createNotFoundException($str);
+        }
+
+        $deleteForm = $this->createDeleteForm($code);
+        $editForm = $this->createEditForm($compte);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('parametrage_comptes_edit', array('code' => $code)));
+        }
+
+        return array(
+            'compte'      => $compte,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+    /**
+     * Deletes a Compte entity.
+     *
+     * @Route("/{code}", name="parametrage_comptes_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, $code)
+    {
+        $form = $this->createDeleteForm($code);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $compte = $em->getRepository('AppBundle:Compte')->findOneByCode($code);
+
+            if (!$compte) {
+                $str = $this->get('translator')->trans('compte.not_found', array('%code%' => $code));
+				throw $this->createNotFoundException($str);
+            }
+
+            $em->remove($compte);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('parametrage_comptes'));
+    }
+
+    /**
+     * Creates a form to delete a Compte entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($code)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('parametrage_comptes_delete', array('code' => $code)))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
 }

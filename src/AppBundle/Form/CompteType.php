@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 class CompteType extends AbstractType
 {
     /**
@@ -14,10 +17,16 @@ class CompteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('code', null, array('required' => false))
-            ->add('libelle', null, array('required' => false))
-        ;
+		$builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+			$compte = $event->getData();
+			$form = $event->getForm();
+
+			if (!$compte || null === $compte->getId())
+			{
+				$form->add('code', null, array('required' => false));
+			}
+		});
+        $builder->add('libelle', null, array('required' => false));
     }
     
     /**
