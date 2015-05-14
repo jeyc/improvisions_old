@@ -4,3 +4,28 @@ site:
 parametrage:
     title: Paramétrage
     
+compte:
+    label:
+        code: Code
+        libelle: Libellé
+    form:
+        submit:
+            collection_creation: Créer les comptes
+            compte_edit: Modifier le compte
+            compte_delete: Supprimer le compte
+    page:
+        collection_creation:
+            title: Nouveaux comptes
+        index:
+            title: Liste des comptes
+        compte_edit:
+            title: Paramétrage du compte %code%
+            edit_section_title: Modification du compte
+            delete_section_title: Suppression du compte
+    menu:
+        title: Comptes
+    not_found: Compte %code% non trouvé.
+    action_result:
+        collection_ok_added: Les comptes ont bien été créés.
+        ok_edited: Le compte a bien été modifié.
+        ok_deleted: Le compte a bien été supprimé.

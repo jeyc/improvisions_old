@@ -1,0 +1,7 @@
+{%- block form_row -%}
+    <td>
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+		{{- form_errors(form) -}}
+    </td>
+{%- endblock form_row -%}

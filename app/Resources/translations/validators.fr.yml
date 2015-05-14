@@ -1,0 +1,9 @@
+compte:
+    code:
+        not_blank: Veuillez saisir un code.
+        regex: Le code doit commencer par un chiffre de 1 à 9 suivi d'exatement 5 chiffres.
+        unique: Ce code est déjà utilisé.
+
+    libelle:
+        not_blank: Veuillez saisir un libellé.
+
