@@ -62,7 +62,11 @@ class CompteController extends Controller
 			}
 			
 			$em->flush();
-			
+		
+			$this->get('session')->getFlashBag()->add(
+            'notice',
+            'compte.action_result.collection_ok_added'
+			);
             return $this->redirect($this->generateUrl('parametrage_comptes'));
         }
 
@@ -184,8 +188,13 @@ class CompteController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('parametrage_comptes_edit', array('code' => $code)));
+			
+			$this->get('session')->getFlashBag()->add(
+            'notice',
+            'compte.action_result.ok_edited'
+			);
+            
+			return $this->redirect($this->generateUrl('parametrage_comptes_edit', array('code' => $code)));
         }
 
         return array(
@@ -216,6 +225,12 @@ class CompteController extends Controller
 
             $em->remove($compte);
             $em->flush();
+			
+			$this->get('session')->getFlashBag()->add(
+            'notice',
+            'compte.action_result.ok_deleted'
+			);
+            
         }
 
         return $this->redirect($this->generateUrl('parametrage_comptes'));
