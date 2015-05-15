@@ -8,6 +8,7 @@ compte:
     label:
         code: Code
         libelle: Libellé
+        mouvementable: Compte mouvementable
     form:
         submit:
             collection_creation: Créer les comptes

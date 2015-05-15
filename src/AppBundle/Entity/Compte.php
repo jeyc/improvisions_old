@@ -41,6 +41,14 @@ class Compte
      */
     private $libelle;
 
+	/**
+     * @var boolean
+     *
+     * @ORM\Column(name="mouvementable", type="boolean", options={"default"=false})
+	 * @Assert\Type(type="bool")
+     */
+    private $mouvementable;
+
 
     /**
      * Get id
@@ -98,4 +106,27 @@ class Compte
         return $this->libelle;
     }
 	
+
+    /**
+     * Set mouvementable
+     *
+     * @param boolean $mouvementable
+     * @return Compte
+     */
+    public function setMouvementable($mouvementable)
+    {
+        $this->mouvementable = $mouvementable;
+
+        return $this;
+    }
+
+    /**
+     * Get mouvementable
+     *
+     * @return boolean 
+     */
+    public function getMouvementable()
+    {
+        return $this->mouvementable;
+    }
 }

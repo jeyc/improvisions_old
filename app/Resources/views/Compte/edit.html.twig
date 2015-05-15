@@ -9,6 +9,7 @@
 		{{ form_start(edit_form) }}
 		{{ form_errors(edit_form) }}
 		{{ form_row(edit_form.libelle, {'label': 'compte.label.libelle'}) }}
+		{{ form_row(edit_form.mouvementable, {'label': 'compte.label.mouvementable'}) }}
 		<input type="submit" value="{{ 'compte.form.submit.compte_edit'|trans }}"/>
 		{{ form_end(edit_form) }}
 	</div>
