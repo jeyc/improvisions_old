@@ -9,6 +9,7 @@
             <tr>
                 <th>{{ 'compte.label.code'|trans }}</th>
                 <th>{{ 'compte.label.libelle'|trans }}</th>
+				<th>{{ 'compte.label.mouvementable'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,7 @@
             <tr>
                 <td>{{ compte.code }}</td>
                 <td><a href="{{ path('parametrage_comptes_edit', { 'code': compte.code }) }}">{{ compte.libelle }}</a></td>
+				<td>{{ compte.mouvementable ? 'misc.yes'|trans|humanize : 'misc.no'|trans|humanize }}</td>
             </tr>
         {% endfor %}
         </tbody>

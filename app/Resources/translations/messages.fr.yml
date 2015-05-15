@@ -30,3 +30,7 @@ compte:
         collection_ok_added: Les comptes ont bien été créés.
         ok_edited: Le compte a bien été modifié.
         ok_deleted: Le compte a bien été supprimé.
+
+misc:
+    yes: oui
+    no: non
