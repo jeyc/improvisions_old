@@ -27,6 +27,7 @@ class CompteType extends AbstractType
 			}
 		});
         $builder->add('libelle', null, array('required' => false));
+		$builder->add('mouvementable', null, array('required' => false));
     }
     
     /**

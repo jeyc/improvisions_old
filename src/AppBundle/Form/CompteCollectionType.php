@@ -18,6 +18,7 @@ class CompteCollectionType extends AbstractType
     {
         $builder->add('comptes', 'collection', array(
 			'type' => new CompteType(),
+			'allow_add' => true,
 		));
     }
 

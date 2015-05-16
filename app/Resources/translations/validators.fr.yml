@@ -6,4 +6,7 @@ compte:
 
     libelle:
         not_blank: Veuillez saisir un libellé.
+    collection:
+        no_compte: Veuillez saisir au moins un compte.
+        multiple_code: Vous avez saisi plusieurs fois le compte %code%.
 

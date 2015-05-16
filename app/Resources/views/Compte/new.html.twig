@@ -2,19 +2,64 @@
 
 {% form_theme form 'form/fields_table.html.twig' %}
 
+{% macro compte_prototype(compte) %}
+	<tr>
+		{{ form_row(compte.code, {'label': 'compte.label.code'}) }}
+		{{ form_row(compte.libelle, {'label': 'compte.label.libelle'}) }}
+		{{ form_row(compte.mouvementable, {'label': 'compte.label.mouvementable'}) }}
+	</tr>
+{% endmacro %}
+
 {% block page_title %}{{ 'compte.page.collection_creation.title'|trans }}{% endblock %}
 
 {% block content %}
+	<script>
+		var $divCollHolder;
+		var $tableCollHolder;
+		
+		var $addCompteLink = $('<a href="#">Add compte</a>');
+		var $newLinkP = $('<p></p>').append($addCompteLink);
+		
+		jQuery(document).ready(function() {
+			$tableCollHolder = $('table.comptes');
+			$divCollHolder = $('div.comptes');
+			
+			$divCollHolder.append($newLinkP);
+			
+			$tableCollHolder.data('index', $tableCollHolder.find('tr').length);
+			
+			$addCompteLink.on('click', function(e) {
+				
+				// prevent the link from creating a "#" on the URL
+				e.preventDefault();
+				
+				// add a new tag form (see next code block)
+				addCompteForm($tableCollHolder);
+			});
+		});
+		
+		function addCompteForm($tableCollHolder) {
+			var prototype = $tableCollHolder.data('prototype');
+			
+			var index = $tableCollHolder.data('index');
+			
+			var newForm = prototype.replace(/__name__/g, index);
+			
+			$tableCollHolder.data('index', index + 1);
+			
+			$tableCollHolder.append(newForm);
+		
+		}
+	</script>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 		{{ form_errors(form) }}
-		<table>
+		<div class="comptes">
+		<table class="comptes" data-prototype="{{ _self.compte_prototype(form.comptes.vars.prototype)|e }}">
 			{% for compte in form.comptes %}
-			<tr>
-				{{ form_row(compte.code, {'label': 'compte.label.code'}) }}
-				{{ form_row(compte.libelle, {'label': 'compte.label.libelle'}) }}
-			</tr>
+				{{ _self.compte_prototype(compte) }}
 			{% endfor %}
 		</table>
+		</div>
 		<input type="submit" value="{{ 'compte.form.submit.collection_creation'|trans }}"/>
 	{{ form_end(form) }}
 
