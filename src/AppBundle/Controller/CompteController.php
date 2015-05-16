@@ -85,7 +85,7 @@ class CompteController extends Controller
      */
     private function createCreateForm(CompteCollection $comptes)
     {
-		$nb_comptes = 10;
+		$nb_comptes = 5;
 		
 		for ($i = 0; $i < $nb_comptes; $i++)
 		{

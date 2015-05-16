@@ -129,4 +129,16 @@ class Compte
     {
         return $this->mouvementable;
     }
+	
+	/**
+     * To String
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getCode() . ' - ' . $this->getLibelle();
+    }
+	
+	
 }
