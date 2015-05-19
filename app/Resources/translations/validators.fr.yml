@@ -10,3 +10,16 @@ compte:
         no_compte: Veuillez saisir au moins un compte.
         multiple_code: Vous avez saisi plusieurs fois le compte %code%.
 
+operation:
+    date.not_blank: Veuillez saisir une date.
+    libelle.not_blank: Veuillez saisir un libellé.
+    no_debit: Il faut au moins une écriture au débit.
+    no_credit: Il faut au moins une écriture au crédit.
+    balance_not_nul: La balance n'est pas nulle.
+
+ecriture:
+    compte.not_blank: Veuillez saisir un compte.
+    type.not_blank: Veuillez saisir un type (débit ou crédit).
+    type.deb_or_cre: Le type ne peut être que débit ou crédit.
+    montant.not_blank: Veuillez saisir un montant.
+    montant.not_zero: Veuillez saisir un montant non nul.

@@ -9,6 +9,7 @@ compte:
         code: Code
         libelle: Libellé
         mouvementable: Compte mouvementable
+        compte: Compte
     form:
         submit:
             collection_creation: Créer les comptes
@@ -30,6 +31,23 @@ compte:
         collection_ok_added: Les comptes ont bien été créés.
         ok_edited: Le compte a bien été modifié.
         ok_deleted: Le compte a bien été supprimé.
+
+operation:
+    label:
+        date: Date
+        libelle: Libellé
+    form.submit.creation: Enregistrer l'opération
+    page.creation.title: Nouvelle opération
+    page.show.title: Détail de l'opération
+    page.index.title: Liste des opérations
+ecriture:
+    type:
+        deb: Débit
+        cre: Crédit
+    label:
+        compte: Compte
+        type: Type
+        montant: Montant
 
 misc:
     yes: oui

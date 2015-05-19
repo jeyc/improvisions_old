@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'operation.page.show.title'|trans }}{% endblock %}
+
+
+{% block content %}
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>{{ 'operation.label.date'|trans }}</th>
+                <td>{{ operation.date|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'operation.label.libelle'|trans }}</th>
+                <td>{{ operation.libelle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+	<table>
+		<tr>
+			<th>{{ 'compte.label.compte'|trans }}</th>
+			<th>{{ 'ecriture.type.deb'|trans }}</th>
+			<th>{{ 'ecriture.type.cre'|trans }}</th>
+		</tr>
+		{% for ecriture in operation.ecritures %}
+		<tr>
+			<td>
+			{{ ecriture.compte }}
+			</td>
+			<td>
+			{% if ecriture.type is constant('AppBundle\\Entity\\Ecriture::DEB') %}
+			{{ ecriture.montant }}
+			{% endif %}
+			</td>
+			<td>
+			{% if ecriture.type is constant('AppBundle\\Entity\\Ecriture::CRE') %}
+			{{ ecriture.montant }}
+			{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+{% endblock %}
