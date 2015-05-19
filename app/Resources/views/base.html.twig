@@ -4,8 +4,7 @@
         <meta charset="UTF-8" />
         <title>{% block title %}{% block page_title %}{% endblock %} - {% block site_title %}Improvisions{% endblock %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-		<script src="{{ asset('javascript/jquery-2.1.4.min.js') }}"></script>
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         <header>
@@ -35,6 +34,9 @@
 			{% block content %}{% endblock %}
 		</div>
 		
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+			<script src="{{ asset('javascript/jquery-2.1.4.min.js') }}"></script>
+			<script src="{{ asset('javascript/form_collection.plugin.js') }}"></script>
+		{% endblock %}
     </body>
 </html>
