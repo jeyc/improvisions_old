@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+<ul>
+	<li>{% include 'operation/menu.html.twig' %}</li>
+</ul>
+{% endblock %}
+
+{% block page_title %}{{ 'gestion.title'|trans }}{% endblock %}
+
+{% block content %}
+	{{ block('nav') }}
+{% endblock %}

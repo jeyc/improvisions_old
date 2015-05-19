@@ -40,6 +40,7 @@ operation:
     page.creation.title: Nouvelle opération
     page.show.title: Détail de l'opération
     page.index.title: Liste des opérations
+    menu.title: Opérations
 ecriture:
     type:
         deb: Débit
