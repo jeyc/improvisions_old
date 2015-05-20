@@ -23,3 +23,8 @@ ecriture:
     type.deb_or_cre: Le type ne peut être que débit ou crédit.
     montant.not_blank: Veuillez saisir un montant.
     montant.not_zero: Veuillez saisir un montant non nul.
+
+annee:
+    annee.not_blank: Veuillez saisir une année comprise entre 2010 et 2099.
+    annee.regex: Veuillez saisir une année comprise entre 2010 et 2099.
+    annee.unique: Cette année existe déjà.
