@@ -1,0 +1,68 @@
+{% extends 'gestion.html.twig' %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+	jQuery(document).ready(function() {
+		$('table.ecritures').formCollection({min: "2", max: "30", callBack: computeBalance});
+		
+		var $balanceP = $('<p></p>').insertAfter($('table.ecritures'));
+		
+		function computeBalance() {
+			var balance = 0;
+			
+			$('table.ecritures tr').each(function() {
+				var factor = $(this).find(':input.type').val() == 1 ? -1 : 1;
+				var montant = $(this).find(':input.montant').val();
+				
+				balance += factor * montant;
+			});
+			
+			$balanceP.text('Balance = ' + balance);
+		}
+		
+		$('table.ecritures').on('change', ':input.type', computeBalance);
+		$('table.ecritures').on('change', ':input.montant', computeBalance);
+		$('table.ecritures').on('detach', ':tr', computeBalance);
+		
+	});
+	
+	
+	
+</script>
+{% endblock %}
+
+{% form_theme form 'form/fields_table.html.twig' %}
+
+{% macro ecriture_prototype(ecriture) %}
+	<tr>
+		{{ form_row(ecriture.compte, {'label': 'ecriture.label.compte'}) }}
+		<td>
+        {{ form_label(ecriture.type, 'ecriture.label.type') }}
+        {{ form_widget(ecriture.type, {'attr': {'class': 'type'}}) }}
+		{{ form_errors(ecriture.type) }}
+		</td>
+		<td>
+        {{ form_label(ecriture.montant, 'ecriture.label.montant') }}
+        {{ form_widget(ecriture.montant, {'attr': {'class': 'montant'}}) }}
+		{{ form_errors(ecriture.montant) }}
+		</td>
+	</tr>
+{% endmacro %}
+
+{% block page_title %}{{ 'operation.page.creation.title'|trans }}{% endblock %}
+
+{% block content %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+		{{ form_errors(form) }}
+		{{ form_row(form.date, {'label': 'operation.label.date'}) }}
+		{{ form_row(form.libelle, {'label': 'operation.label.libelle'}) }}
+		<table class="ecritures" data-prototype="{{ _self.ecriture_prototype(form.ecritures.vars.prototype)|e }}">
+			{% for ecriture in form.ecritures %}
+				{{ _self.ecriture_prototype(ecriture) }}
+			{% endfor %}
+		</table>
+		<input type="submit" value="{{ 'operation.form.submit.creation'|trans }}"/>
+	{{ form_end(form) }}
+
+{% endblock %}
