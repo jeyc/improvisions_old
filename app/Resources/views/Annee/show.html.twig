@@ -1,0 +1,7 @@
+{% extends 'annee/index.html.twig' %}
+
+{% block page_title %}{{ 'annee.pages.show.title'|trans({'%annee%': annee.annee}) }}{% endblock %}
+
+{% block content %}
+	<p>{{ annee.annee }}</p>
+{% endblock %}

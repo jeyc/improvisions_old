@@ -1,0 +1,4 @@
+annee:
+    annee:
+        format: Saisissez une année comprise entre 2010 et 2099
+        unique: Cette année existe déjà

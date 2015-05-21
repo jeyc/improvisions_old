@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'annee.pages.index.title'|trans }}{% endblock %}
+
+{% block nav %}
+	<li>{{ include('annee/menu.html.twig') }}</li>
+{% endblock %}
+
+{% block content %}
+
+	<ul>
+		{% for annee in annees %}
+		<li><a href="{{ path('annees_show', { 'annee_annee': annee.annee }) }}">{{ annee.annee }}</a></li>
+        {% endfor %}
+	</ul>
+
+{% endblock %}

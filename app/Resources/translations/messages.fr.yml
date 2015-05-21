@@ -4,3 +4,21 @@ site:
 
 menu:
     homepage: Accueil
+    annees: Années
+
+annee:
+    pages:
+        index:
+            title: Liste des années
+        new:
+            title: Créer une nouvelle année
+        show:
+            title: Détails de l'année %annee%
+    nav:
+        index: Toutes les années
+        new: Nouvelle année
+    fields:
+        label:
+            annee: Année
+    forms:
+        new.submit: Créer l'année

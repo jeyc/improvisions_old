@@ -1,0 +1,12 @@
+{% extends 'annee/index.html.twig' %}
+
+{% block page_title %}{{ 'annee.pages.new.title'|trans }}{% endblock %}
+
+{% block content %}
+    
+    {{ form_start(form) }}
+		{{ form_row(form.annee, {'label': 'annee.fields.label.annee'|trans }) }}
+		<input type="submit" value="{{ 'annee.forms.new.submit'|trans }}"/>
+	{{ form_end(form) }}
+
+{% endblock %}
