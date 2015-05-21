@@ -2,18 +2,28 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}{% block page_title %}{% endblock %} - {% block site_title %}Improvisions{% endblock %}{% endblock %}</title>
+        <title>{% block title %}{% block page_title '' %} - {% block site_title %}{{ 'site.title'|trans }}{% endblock %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}
 			<header>
-			{% block header %}
-				<h1><a href="{{ path('homepage') }}">{{ block('site_title') }}</a></h1>
-			{% endblock %}
+				<h1><a id="home" href="{{ path('homepage') }}">{{ block('site_title') }}</a></h1>
+				<nav id="menu">
+					<ul>
+						<li><a href="{{ path('homepage') }}">{{ 'menu.homepage'|trans}}</a></li>
+					</ul>
+				</nav>
 			</header>
-		{% endblock %}
+			<nav id="nav">
+				<ul>
+					{% block nav '' %}
+				</ul>
+			</nav>
+			<section id="main">
+				<h1>{{ block('page_title') }}</h1>
+				{% block content '' %}
+			</section>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,6 @@
+site:
+    title: Improvisions
+    short_description: Calcul de mes impôts et des provisions
+
+menu:
+    homepage: Accueil
